@@ -15,7 +15,7 @@ public class SnakeHandler : MonoBehaviour
     GameObject head;
     GameObject lastPart;
     int count = 0;
-    public float lerpFactor = 1;
+    public float speed = 0;
 
     void Start()
     {
@@ -56,8 +56,9 @@ public class SnakeHandler : MonoBehaviour
             float angle = MathF.Atan2(target.y - head.transform.position.y, target.x - head.transform.position.x) / MathF.PI * 180 + 90;
 
             head.transform.rotation = Quaternion.Euler(0, 0, angle);
-            if ((target - (Vector2)head.transform.position).magnitude > lengthPerPart) {
-                head.transform.position = Vector3.Lerp(head.transform.position, target, lerpFactor);
+            Vector2 diff = target - (Vector2)head.transform.position;
+            if (diff.magnitude > lengthPerPart) {
+                head.transform.position = head.transform.position + (Vector3)diff.normalized * speed * Time.deltaTime;
             }
         }
     }
