@@ -25,7 +25,7 @@ public class SnakeHandler : MonoBehaviour
     }
 
 
-    void AddParts(int count) {
+    public void AddParts(int count) {
         for (int i = 0; i < count; i++) {
             AddPart();
         }
@@ -33,6 +33,8 @@ public class SnakeHandler : MonoBehaviour
     void AddPart() {
 
         GameObject go =Instantiate(bodyPrefab, transform);
+        go.transform.position = lastPart.transform.position;
+
         go.GetComponent<SpriteRenderer>().sortingOrder = -count++;
 
         SnakePartHandler newPart = go.GetComponent<SnakePartHandler>();
