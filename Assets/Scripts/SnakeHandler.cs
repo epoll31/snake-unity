@@ -15,13 +15,13 @@ public class SnakeHandler : MonoBehaviour
     GameObject head;
     GameObject lastPart;
     int count = 0;
-    public float speed = 0;
+    public float speed = 4;
 
     void Start()
     {
         head = lastPart = Instantiate(headPrefab, transform);
 
-        AddParts(5);
+        AddParts(10);
     }
 
 

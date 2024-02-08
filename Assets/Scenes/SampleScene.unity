@@ -247,7 +247,7 @@ MonoBehaviour:
   headPrefab: {fileID: 5619343890752879838, guid: 658ad2939f905418ca70e3b53ee0f0b3, type: 3}
   bodyPrefab: {fileID: 9138808215901616814, guid: 41e79acbf25d84b1f8785219584e1769, type: 3}
   lengthPerPart: 0.2
-  lerpFactor: 1
+  speed: 4
 --- !u!4 &1055896201
 Transform:
   m_ObjectHideFlags: 0
