@@ -59,26 +59,36 @@ public class SnakeHandler : MonoBehaviour
     {
         if (Input.touchCount > 0) {
             Touch touch = Input.GetTouch(0);
-            // var view = Camera.main.ScreenToViewportPoint();
-            // if (view.x > 0 && view.x < 1 && view.y > 0 && view.y < 1) {
-                Vector3 mousePos = touch.position;
-                mousePos.z = Camera.main.nearClipPlane;
-                Vector2 target = Camera.main.ScreenToWorldPoint(mousePos);
-                // target.Set(target.x, target.y, 0);
+            
+            Vector3 mousePos = touch.position;
+            mousePos.z = Camera.main.nearClipPlane;
+            Vector2 target = Camera.main.ScreenToWorldPoint(mousePos);
 
 
-                direction = target - (Vector2)head.transform.position;
-                float angle = MathF.Atan2(direction.y, direction.x) / MathF.PI * 180 + 90;
+            direction = target - (Vector2)head.transform.position;
+            float angle = MathF.Atan2(direction.y, direction.x) / MathF.PI * 180 + 90;
 
-                head.transform.rotation = Quaternion.Euler(0, 0, angle);
-                
-                if (direction.magnitude > lengthPerPart) {
-                    head.transform.position = head.transform.position + speed * Time.deltaTime * (Vector3)direction.normalized;
-                }
-            // }
+            head.transform.rotation = Quaternion.Euler(0, 0, angle);
+            
+            if (direction.magnitude > lengthPerPart) {
+                head.transform.position = head.transform.position + speed * Time.deltaTime * (Vector3)direction.normalized;
+            }
         }
         else {
-            head.transform.position = head.transform.position + coastSpeed * Time.deltaTime * (Vector3)direction.normalized;
+            float halfHeight = Camera.main.orthographicSize;
+            float halfWidth = halfHeight * Screen.width / Screen.height;
+
+            if (head.transform.position.y < Camera.main.transform.position.y - halfHeight || head.transform.position.y > Camera.main.transform.position.y + halfHeight) {
+                direction.y *= -1;
+            }
+            if (head.transform.position.x < Camera.main.transform.position.x - halfWidth || head.transform.position.x > Camera.main.transform.position.x + halfWidth) {
+                direction.x *= -1;
+            }
+
+            float angle = MathF.Atan2(direction.y, direction.x) / MathF.PI * 180 + 90;
+
+            
+            head.transform.SetPositionAndRotation(head.transform.position + coastSpeed * Time.deltaTime * (Vector3)direction.normalized, Quaternion.Euler(0, 0, angle));
         }
     }
 }

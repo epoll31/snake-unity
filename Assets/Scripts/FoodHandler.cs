@@ -17,6 +17,6 @@ public class FoodHandler : MonoBehaviour
     }
 
     private void UpdateFoodPosition() {
-        active.transform.SetPositionAndRotation(StaticHelpers.RandomScreenPosition(), StaticHelpers.RandomRotation());
+        active.transform.SetPositionAndRotation(StaticHelpers.RandomScreenPosition(0.1f, 0.1f), StaticHelpers.RandomRotation());
     }
 }

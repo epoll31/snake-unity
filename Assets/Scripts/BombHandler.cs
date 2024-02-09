@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BombHandler : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class BombHandler : MonoBehaviour
 
     void AddBomb() {
         GameObject bomb = Instantiate(BombPrefab, transform);
-        bomb.transform.SetPositionAndRotation(StaticHelpers.RandomScreenPosition(), StaticHelpers.RandomRotation());
+        bomb.transform.SetPositionAndRotation(StaticHelpers.RandomScreenPosition(0.1f, 0.1f), StaticHelpers.RandomRotation());
         bombs.Add(bomb);
     }
 }
