@@ -10,9 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7685795344349412196}
   - component: {fileID: 1656903036003466821}
+  - component: {fileID: 4232231289896289197}
+  - component: {fileID: 5915566756535209681}
+  - component: {fileID: 5440870212074506889}
   m_Layer: 0
   m_Name: head
-  m_TagString: Untagged
+  m_TagString: Snake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2008483803
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8577a3494d2ca43c083d12364f11089a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -84,3 +87,181 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &4232231289896289197
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5619343890752879838}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.45, y: 5.99}
+    newSize: {x: 5.45, y: 5.99}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.285, y: -2.995}
+      - {x: 0.505, y: -2.995}
+      - {x: 0.585, y: -2.955}
+      - {x: 0.655, y: -2.875}
+      - {x: 0.695, y: -2.8049998}
+      - {x: 0.705, y: -2.7649999}
+      - {x: 0.705, y: -2.385}
+      - {x: 0.885, y: -2.335}
+      - {x: 1.045, y: -2.2749999}
+      - {x: 1.305, y: -2.155}
+      - {x: 1.515, y: -2.0349998}
+      - {x: 1.755, y: -1.8449999}
+      - {x: 2.055, y: -1.545}
+      - {x: 2.165, y: -1.415}
+      - {x: 2.2549999, y: -1.305}
+      - {x: 2.385, y: -1.105}
+      - {x: 2.5149999, y: -0.84499997}
+      - {x: 2.585, y: -0.675}
+      - {x: 2.635, y: -0.515}
+      - {x: 2.675, y: -0.355}
+      - {x: 2.695, y: -0.255}
+      - {x: 2.715, y: -0.13499999}
+      - {x: 2.725, y: -0.044999998}
+      - {x: 2.725, y: 0.585}
+      - {x: 2.715, y: 0.675}
+      - {x: 2.685, y: 0.85499996}
+      - {x: 2.645, y: 1.035}
+      - {x: 2.585, y: 1.225}
+      - {x: 2.5449998, y: 1.3149999}
+      - {x: 2.405, y: 1.615}
+      - {x: 2.345, y: 1.7149999}
+      - {x: 2.205, y: 1.915}
+      - {x: 2.075, y: 2.065}
+      - {x: 1.795, y: 2.345}
+      - {x: 1.5949999, y: 2.5149999}
+      - {x: 1.535, y: 2.5549998}
+      - {x: 1.345, y: 2.675}
+      - {x: 1.0749999, y: 2.8049998}
+      - {x: 0.955, y: 2.865}
+      - {x: 0.79499996, y: 2.905}
+      - {x: 0.645, y: 2.945}
+      - {x: 0.545, y: 2.965}
+      - {x: 0.42499998, y: 2.985}
+      - {x: 0.355, y: 2.995}
+      - {x: -0.345, y: 2.995}
+      - {x: -0.42499998, y: 2.985}
+      - {x: -0.59499997, y: 2.955}
+      - {x: -0.805, y: 2.915}
+      - {x: -0.97499996, y: 2.845}
+      - {x: -1.0749999, y: 2.8049998}
+      - {x: -1.255, y: 2.725}
+      - {x: -1.4449999, y: 2.615}
+      - {x: -1.635, y: 2.485}
+      - {x: -1.735, y: 2.405}
+      - {x: -2.075, y: 2.075}
+      - {x: -2.135, y: 1.995}
+      - {x: -2.2649999, y: 1.8349999}
+      - {x: -2.365, y: 1.685}
+      - {x: -2.495, y: 1.435}
+      - {x: -2.575, y: 1.245}
+      - {x: -2.655, y: 1.035}
+      - {x: -2.695, y: 0.815}
+      - {x: -2.725, y: 0.625}
+      - {x: -2.725, y: -0.065}
+      - {x: -2.715, y: -0.145}
+      - {x: -2.695, y: -0.265}
+      - {x: -2.645, y: -0.48499998}
+      - {x: -2.615, y: -0.59499997}
+      - {x: -2.5249999, y: -0.825}
+      - {x: -2.375, y: -1.125}
+      - {x: -2.2549999, y: -1.305}
+      - {x: -2.165, y: -1.415}
+      - {x: -2.055, y: -1.545}
+      - {x: -1.8249999, y: -1.775}
+      - {x: -1.745, y: -1.8449999}
+      - {x: -1.5749999, y: -1.985}
+      - {x: -1.515, y: -2.0249999}
+      - {x: -1.305, y: -2.155}
+      - {x: -1.115, y: -2.245}
+      - {x: -0.995, y: -2.2949998}
+      - {x: -0.85499996, y: -2.345}
+      - {x: -0.755, y: -2.375}
+      - {x: -0.705, y: -2.385}
+      - {x: -0.705, y: -2.7749999}
+      - {x: -0.66499996, y: -2.875}
+      - {x: -0.575, y: -2.965}
+      - {x: -0.525, y: -2.985}
+      - {x: -0.515, y: -2.995}
+      - {x: -0.285, y: -2.995}
+      - {x: -0.205, y: -2.945}
+      - {x: 0.005, y: -2.735}
+      - {x: 0.225, y: -2.955}
+  m_UseDelaunayMesh: 0
+--- !u!114 &5915566756535209681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5619343890752879838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d49f0ecb0777747618cdd63669dc8fe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snakeHandler: {fileID: 0}
+  foodHandler: {fileID: 0}
+--- !u!50 &5440870212074506889
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5619343890752879838}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

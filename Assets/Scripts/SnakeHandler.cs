@@ -10,18 +10,28 @@ public class SnakeHandler : MonoBehaviour
 {
     public GameObject headPrefab;
     public GameObject bodyPrefab;
+    public FoodHandler foodHandler;
     public float lengthPerPart;
     
     GameObject head;
     GameObject lastPart;
     int count = 0;
-    public float speed = 4;
+    public float speed = 2;
+    public float coastSpeed = 1;
+    
+    Vector2 direction;
 
     void Start()
     {
         head = lastPart = Instantiate(headPrefab, transform);
+        SnakeFoodCollider snakeFoodCollider = head.GetComponent<SnakeFoodCollider>();
+        snakeFoodCollider.snakeHandler = this;
+        snakeFoodCollider.foodHandler = foodHandler;
 
-        AddParts(10);
+        // head.GetComponent<SpriteRenderer>().sortingOrder = -++count;
+
+
+        AddParts(4);
     }
 
 
@@ -35,7 +45,7 @@ public class SnakeHandler : MonoBehaviour
         GameObject go =Instantiate(bodyPrefab, transform);
         go.transform.position = lastPart.transform.position;
 
-        go.GetComponent<SpriteRenderer>().sortingOrder = -count++;
+        go.GetComponent<SpriteRenderer>().sortingOrder = -++count;
 
         SnakePartHandler newPart = go.GetComponent<SnakePartHandler>();
 
@@ -47,21 +57,28 @@ public class SnakeHandler : MonoBehaviour
 
     void Update()
     {
-        var view = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-        if (view.x > 0 && view.x < 1 && view.y > 0 && view.y < 1) {
-            Vector3 mousePos = Input.mousePosition;
-            mousePos.z = Camera.main.nearClipPlane;
-            Vector2 target = Camera.main.ScreenToWorldPoint(mousePos);
-            // target.Set(target.x, target.y, 0);
+        if (Input.touchCount > 0) {
+            Touch touch = Input.GetTouch(0);
+            // var view = Camera.main.ScreenToViewportPoint();
+            // if (view.x > 0 && view.x < 1 && view.y > 0 && view.y < 1) {
+                Vector3 mousePos = touch.position;
+                mousePos.z = Camera.main.nearClipPlane;
+                Vector2 target = Camera.main.ScreenToWorldPoint(mousePos);
+                // target.Set(target.x, target.y, 0);
 
 
-            float angle = MathF.Atan2(target.y - head.transform.position.y, target.x - head.transform.position.x) / MathF.PI * 180 + 90;
+                direction = target - (Vector2)head.transform.position;
+                float angle = MathF.Atan2(direction.y, direction.x) / MathF.PI * 180 + 90;
 
-            head.transform.rotation = Quaternion.Euler(0, 0, angle);
-            Vector2 diff = target - (Vector2)head.transform.position;
-            if (diff.magnitude > lengthPerPart) {
-                head.transform.position = head.transform.position + (Vector3)diff.normalized * speed * Time.deltaTime;
-            }
+                head.transform.rotation = Quaternion.Euler(0, 0, angle);
+                
+                if (direction.magnitude > lengthPerPart) {
+                    head.transform.position = head.transform.position + speed * Time.deltaTime * (Vector3)direction.normalized;
+                }
+            // }
+        }
+        else {
+            head.transform.position = head.transform.position + coastSpeed * Time.deltaTime * (Vector3)direction.normalized;
         }
     }
 }
