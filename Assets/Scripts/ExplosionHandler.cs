@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ExplosionHandler : MonoBehaviour
 {
@@ -7,13 +6,19 @@ public class ExplosionHandler : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        print("hit bomb: " + collision.collider.tag);
         if (collision.collider.CompareTag("Snake"))
         {
-            Explode();
+            ExplodeAllBombs();
         }
     }
 
+    public void ExplodeAllBombs() {
+      ExplosionHandler[] explosions = FindObjectsOfType<ExplosionHandler>();
+      foreach (ExplosionHandler explosion in explosions)
+      {
+          explosion.Explode();
+      }
+    }
     public void Explode()
     {
         GameObject explosion = Instantiate(ExplosionPrefab);
@@ -22,6 +27,15 @@ public class ExplosionHandler : MonoBehaviour
         transform.SetPositionAndRotation(StaticHelpers.RandomScreenPosition(), StaticHelpers.RandomRotation());
         DontDestroyOnLoad(explosion);
 
-        SceneManager.LoadScene("HomeScene");
+        SingleState.Instance.State = States.Home;
     }
+
+    void OnDestroy()
+    {
+      if (SingleState.Instance.State == States.Home)
+      {
+        return;
+      }
+      FindObjectOfType<BombHandler>()?.AddBomb();
+    } 
 }

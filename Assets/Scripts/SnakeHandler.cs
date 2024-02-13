@@ -117,7 +117,7 @@ public class SnakeHandler : MonoBehaviour
 
         Vector2 direction = new(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
 
-        if (Time.timeScale != 0)
+        if (SingleState.Instance.State == States.Playing) 
         {
             head.transform.SetPositionAndRotation(
                 newPosition + speedToUse * Time.deltaTime * direction.normalized,
