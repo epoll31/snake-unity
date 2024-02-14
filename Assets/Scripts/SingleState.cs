@@ -21,6 +21,8 @@ public class SingleState : MonoBehaviour
     private static SingleState _instance;
     public static SingleState Instance { get; private set; }
 
+    public int Score;
+
     private void Awake()
     {
         // If there is an instance, and it's not me, delete myself.

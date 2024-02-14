@@ -51,4 +51,5 @@ public class BombHandler : MonoBehaviour
     bomb.transform.localScale = StaticHelpers.GetRandomScale(0.1f, 0.15f); 
     bomb.transform.SetPositionAndRotation(position, StaticHelpers.RandomRotation());
   }
+
 }
