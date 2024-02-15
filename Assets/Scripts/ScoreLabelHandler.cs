@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -14,6 +15,6 @@ public class ScoreLabelHandler : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    tmp.text = SingleState.Instance.Score.ToString();
+    tmp.text = SingleState.Instance.gameData.Score.ToString();
   }
 }

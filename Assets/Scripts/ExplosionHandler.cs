@@ -8,16 +8,18 @@ public class ExplosionHandler : MonoBehaviour
     {
         if (collision.collider.CompareTag("Snake"))
         {
+            SingleState.Instance.State = States.GameOver;
             ExplodeAllBombs();
         }
     }
 
-    public void ExplodeAllBombs() {
-      ExplosionHandler[] explosions = FindObjectsOfType<ExplosionHandler>();
-      foreach (ExplosionHandler explosion in explosions)
-      {
-          explosion.Explode();
-      }
+    public void ExplodeAllBombs()
+    {
+        ExplosionHandler[] explosions = FindObjectsOfType<ExplosionHandler>();
+        foreach (ExplosionHandler explosion in explosions)
+        {
+            explosion.Explode();
+        }
     }
     public void Explode()
     {
@@ -27,15 +29,14 @@ public class ExplosionHandler : MonoBehaviour
         transform.SetPositionAndRotation(StaticHelpers.RandomScreenPosition(), StaticHelpers.RandomRotation());
         DontDestroyOnLoad(explosion);
 
-        SingleState.Instance.State = States.Home;
     }
 
     void OnDestroy()
     {
-      if (SingleState.Instance.State == States.Home)
-      {
-        return;
-      }
-      FindObjectOfType<BombHandler>()?.AddBomb();
-    } 
+        if (SingleState.Instance.State != States.Playing)
+        {
+            return;
+        }
+        FindObjectOfType<BombHandler>()?.AddBomb();
+    }
 }

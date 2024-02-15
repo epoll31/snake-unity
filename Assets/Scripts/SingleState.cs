@@ -8,6 +8,8 @@ public enum States
     Home = 0,
     Playing = 1,
     Paused = 2,
+    GameOver = 3,
+    Stats = 4,
 }
 
 public class StateChangedEventArgs : EventArgs
@@ -16,17 +18,38 @@ public class StateChangedEventArgs : EventArgs
     public States PreviousState { get; set; }
 }
 
+[Serializable]
+public class GameData
+{
+    public int Score;
+    public float Time;
+    public int Length;
+    
+    public GameData() {
+      Score = 0;
+      Time = 0;
+      Length = 0;
+    }
+
+    public GameData(GameData from) {
+      Score = from.Score;
+      Time = from.Time;
+      Length = from.Length;
+    }
+}
+
+
 public class SingleState : MonoBehaviour
 {
     private static SingleState _instance;
     public static SingleState Instance { get; private set; }
 
-    public int Score;
+    public GameData gameData = null;
+    public GameData previousGameData = null;
+    public Stats stats; 
 
     private void Awake()
     {
-        // If there is an instance, and it's not me, delete myself.
-
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -42,6 +65,10 @@ public class SingleState : MonoBehaviour
     private void Initialize()
     {
         StateChanged += OnStateChanged;
+        gameData = new GameData();
+        previousGameData = null;
+        stats = new Stats();
+        stats.PullStats();
     }
 
     public event EventHandler<StateChangedEventArgs> StateChanged;
@@ -84,6 +111,7 @@ public class SingleState : MonoBehaviour
                 {
                     SceneManager.LoadScene("PlayScene");
                 }
+
                 break;
             case States.Paused:
                 if (from == States.Playing)
@@ -92,6 +120,14 @@ public class SingleState : MonoBehaviour
                 }
                 break;
             case States.Home:
+                SceneManager.LoadScene("HomeScene");
+                if (from != States.GameOver)
+                {
+                  previousGameData = new GameData(); 
+                }
+
+                break;
+            case States.GameOver:
                 if (from == States.Paused)
                 {
                     ExplosionHandler[] explosions = FindObjectsOfType<ExplosionHandler>();
@@ -99,11 +135,27 @@ public class SingleState : MonoBehaviour
                     {
                         explosion.Explode();
                     }
+
                     SceneManager.UnloadSceneAsync("PauseScene");
                 }
-                SceneManager.LoadScene("HomeScene");
+                previousGameData = new GameData(gameData);
+                stats.AddGameData(gameData);
+                stats.PushStats();
+                gameData = new GameData();
 
+                SingleState.Instance.State = States.Home;
                 break;
+            case States.Stats:
+                SceneManager.LoadScene("StatsScene");
+                break;
+        }
+    }
+
+    private void Update()
+    {
+        if (SingleState.Instance.State == States.Playing)
+        {
+            gameData.Time += Time.deltaTime;
         }
     }
 }

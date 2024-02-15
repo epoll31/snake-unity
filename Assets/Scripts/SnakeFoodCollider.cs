@@ -9,7 +9,7 @@ public class SnakeFoodCollider : MonoBehaviour
     {
         if (collision.collider.CompareTag("Mouse"))
         {
-            SingleState.Instance.Score += 1;
+            SingleState.Instance.gameData.Score += 1;
             snakeHandler.AddParts(1);
             foodHandler.UpdateFood();
         }

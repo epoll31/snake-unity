@@ -54,6 +54,7 @@ public class SnakeHandler : MonoBehaviour
         newPart.PreviousPart = lastPart;
 
         lastPart = newPart.gameObject;
+        SingleState.Instance.gameData.Length++;
     }
 
     void Update()
