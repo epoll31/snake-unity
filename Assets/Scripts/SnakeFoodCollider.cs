@@ -12,6 +12,7 @@ public class SnakeFoodCollider : MonoBehaviour
             SingleState.Instance.gameData.Score += 1;
             snakeHandler.AddParts(1);
             foodHandler.UpdateFood();
+            SingleState.Instance.PlayClip(Sounds.EatMouse);
         }
     }
 }

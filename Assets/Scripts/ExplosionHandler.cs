@@ -29,6 +29,8 @@ public class ExplosionHandler : MonoBehaviour
         transform.SetPositionAndRotation(StaticHelpers.RandomScreenPosition(), StaticHelpers.RandomRotation());
         DontDestroyOnLoad(explosion);
 
+        SingleState.Instance.PlayClip(Sounds.Explosion);
+
     }
 
     void OnDestroy()

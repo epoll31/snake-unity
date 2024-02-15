@@ -10,6 +10,7 @@ public enum States
   Paused = 2,
   GameOver = 3,
   Stats = 4,
+  Settings = 5
 }
 
 public class StateChangedEventArgs : EventArgs
@@ -166,6 +167,9 @@ public class SingleState : MonoBehaviour
         break;
       case States.Stats:
         SceneManager.LoadScene("StatsScene");
+        break;
+      case States.Settings:
+        SceneManager.LoadScene("SettingsScene");
         break;
     }
   }
