@@ -5,6 +5,7 @@ public class SnakeHandler : MonoBehaviour
   public GameObject headPrefab;
   public GameObject bodyPrefab;
   public FoodHandler foodHandler;
+  [Range(0.1f, float.MaxValue)]
   public float lengthPerPart;
 
   GameObject head;

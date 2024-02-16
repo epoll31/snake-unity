@@ -10,8 +10,20 @@ public class SnakeFoodCollider : MonoBehaviour
         if (collision.collider.CompareTag("Mouse"))
         {
             SingleState.Instance.gameData.Score += 1;
+            if (SingleState.Instance.gameData.Score % 25 == 0) {
+              foodHandler.AddFood();
+            }
+            if (SingleState.Instance.gameData.Score % 10 == 0) {
+              FindObjectOfType<BombHandler>()?.AddBomb();
+            }
+            if (SingleState.Instance.gameData.Score % 15 == 0) {
+              snakeHandler.transform.localScale *= 0.95f;
+              snakeHandler.lengthPerPart *= 0.95f; 
+            }
+
             snakeHandler.AddParts(1);
-            foodHandler.UpdateFood();
+            snakeHandler.lengthPerPart *= 0.99f;
+            foodHandler.UpdateFoodPosition(collision.collider.gameObject);
             SingleState.Instance.PlayClip(Sounds.EatMouse);
         }
     }

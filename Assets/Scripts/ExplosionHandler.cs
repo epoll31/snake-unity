@@ -6,7 +6,7 @@ public class ExplosionHandler : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Snake"))
+        if (collision.collider.CompareTag("SnakeHead"))
         {
             SingleState.Instance.State = States.GameOver;
             ExplodeAllBombs();

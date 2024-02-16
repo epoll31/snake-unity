@@ -38,7 +38,7 @@ public static class StaticHelpers
   }
 
   public static T[] GetComponentsFromSnakeParts<T>() {
-    GameObject snakeHead = GameObject.FindGameObjectWithTag("Snake");
+    GameObject snakeHead = GameObject.FindGameObjectWithTag("SnakeHead");
     GameObject[] snakeParts = GameObject.FindGameObjectsWithTag("SnakePart");
     T[] components = new T[snakeParts.Length + 1];
     components[0] = snakeHead.GetComponent<T>();
