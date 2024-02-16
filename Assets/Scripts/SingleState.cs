@@ -10,7 +10,8 @@ public enum States
   Paused = 2,
   GameOver = 3,
   Stats = 4,
-  Settings = 5
+  Settings = 5,
+  Info = 6
 }
 
 public class StateChangedEventArgs : EventArgs
@@ -42,12 +43,44 @@ public class GameData
 }
 
 [Serializable]
+public class Settings
+{
+  [Range(0, 1)]
+  public float MusicVolume = 0.5f;
+  [Range(0, 1)]
+  public float SoundVolume = 0.5f;
+
+  public void LoadSettings()
+  {
+    MusicVolume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+    SoundVolume = PlayerPrefs.GetFloat("SoundVolume", 0.5f);
+  }
+
+  public void SaveSettings()
+  {
+    SingleState.Instance.MusicSource.volume = MusicVolume;
+    PlayerPrefs.SetFloat("MusicVolume", MusicVolume);
+    PlayerPrefs.SetFloat("SoundVolume", SoundVolume);
+  }
+}
+
+public class SoundEffectAttribute: Attribute { }
+
+[Serializable]
 public enum Sounds
 {
-  ButtonPress = 0,
-  GameOver = 1,
-  EatMouse = 2,
-  Explosion = 3,
+  ButtonPress = 0, 
+  EatMouse = 1,
+  Explosion = 2,
+  Thud = 3,
+  Music = 4,
+}
+
+[Serializable]
+public enum SoundType
+{
+  Music = 0,
+  SoundEffect = 1
 }
 
 [Serializable]
@@ -55,6 +88,7 @@ public class Sound
 {
   public Sounds sound;
   public AudioClip clip;
+  public SoundType type; 
 }
 
 public class SingleState : MonoBehaviour
@@ -65,8 +99,10 @@ public class SingleState : MonoBehaviour
   public GameData gameData = null;
   public GameData previousGameData = null;
   public Stats stats;
+  public Settings settings;
 
   public Sound[] sounds;
+  public AudioSource MusicSource;
 
   private void Awake()
   {
@@ -89,6 +125,10 @@ public class SingleState : MonoBehaviour
     previousGameData = null;
     stats = new Stats();
     stats.PullStats();
+    settings = new Settings();
+    settings.LoadSettings();
+
+    PlayClip(Sounds.Music);
   }
 
   public event EventHandler<StateChangedEventArgs> StateChanged;
@@ -114,7 +154,12 @@ public class SingleState : MonoBehaviour
   {
     print("State changed : " + e.PreviousState + " -> " + e.State);
 
-    ChangeScene(e.PreviousState, e.State);
+    if (e.PreviousState == States.Settings)
+    {
+      settings.SaveSettings();
+    }
+
+    ChangeScene(e.PreviousState, e.State); 
   }
 
   private void ChangeScene(States from, States to)
@@ -171,6 +216,9 @@ public class SingleState : MonoBehaviour
       case States.Settings:
         SceneManager.LoadScene("SettingsScene");
         break;
+      case States.Info:
+        SceneManager.LoadScene("InfoScene");
+        break;
     }
   }
 
@@ -182,20 +230,29 @@ public class SingleState : MonoBehaviour
     }
   }
 
-  public void TriggerSound(Sounds sound)
-  {
-    AudioClip clip = Array.Find(sounds, s => s.sound == sound).clip;
-    AudioSource.PlayClipAtPoint(clip, transform.position);
-  }
-
   public void PlayClip(Sounds sound)
   {
-    AudioClip clip = Array.Find(sounds, s => s.sound == sound).clip;
+    Sound s = Array.Find(sounds, s => s.sound == sound);
     GameObject go = new GameObject("SoundClip");
     go.transform.parent = transform;
     AudioSource source = go.AddComponent<AudioSource>();
-    source.clip = clip;
+    source.clip = s.clip;
+  
+    if (s.type == SoundType.Music)
+    {
+      source.volume = settings.MusicVolume;
+      source.loop = true;
+      source.Play();
+      MusicSource = source;
+      return;
+    }
+    
+    if (s.type == SoundType.SoundEffect)
+    {
+      source.volume = settings.SoundVolume;
+    }
+
     source.Play();
-    Destroy(go, clip.length);
+    Destroy(go, s.clip.length);
   }
 }

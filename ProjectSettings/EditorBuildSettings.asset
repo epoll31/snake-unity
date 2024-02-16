@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SettingsScene.unity
     guid: b50c24742bfb348f28dc26c51fb22509
+  - enabled: 1
+    path: Assets/Scenes/InfoScene.unity
+    guid: 20ea9e731dde24c1bbc72746b361923f
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 4844451b92aef44c5bbda30eeba7d354, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: b2ca97ac9571247088b2a5aeec23d061, type: 2}

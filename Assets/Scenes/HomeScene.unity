@@ -1038,13 +1038,25 @@ MonoBehaviour:
     AverageTime: 0
     AverageLength: 0
     TotalGames: 0
+  settings:
+    MusicVolume: 1
+    SoundVolume: 1
   sounds:
   - sound: 0
     clip: {fileID: 8300000, guid: ba94a845446ae434380fe19f52145524, type: 3}
-  - sound: 2
+    type: 1
+  - sound: 1
     clip: {fileID: 8300000, guid: 3825a77c59e3145caa7b87c6d0b7ded5, type: 3}
-  - sound: 3
+    type: 1
+  - sound: 2
     clip: {fileID: 8300000, guid: 0605d54234cf449ebadb188722aa7546, type: 3}
+    type: 1
+  - sound: 3
+    clip: {fileID: 8300000, guid: 7b162a57826184400999a3a97bb0d028, type: 3}
+    type: 1
+  - sound: 4
+    clip: {fileID: 8300000, guid: 1cf86b6246ba047c294341721cf75e1c, type: 3}
+    type: 0
 --- !u!224 &789021114062176334
 RectTransform:
   m_ObjectHideFlags: 0
