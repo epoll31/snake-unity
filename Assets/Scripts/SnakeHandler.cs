@@ -13,10 +13,11 @@ public class SnakeHandler : MonoBehaviour
   int count = 0;
   public float speed = 2;
   public float coastSpeed = 1;
-  public float steerLerpConstant = 1;
-  public float steerLerpDeadzone = 1;
 
   public float angle;
+  [Range(0, 1)]
+  public float steerLerpConstant = 1;
+  // public float steerLerpDeadzone = 1;
 
   void Start()
   {
@@ -73,11 +74,25 @@ public class SnakeHandler : MonoBehaviour
 
       Vector2 toTarget = target - (Vector2)head.transform.position;
 
-      if (toTarget.magnitude > lengthPerPart)
+      // if (toTarget.magnitude > lengthPerPart)
+      // {
+      //   speedToUse = speed;
+      //   angle = Mathf.Atan2(toTarget.y, toTarget.x) * Mathf.Rad2Deg;
+      // }
+      speedToUse = speed;
+
+      float usableLerpConstant = steerLerpConstant;
+
+      if (toTarget.magnitude < lengthPerPart * 2)
       {
-        speedToUse = speed;
-        angle = Mathf.Atan2(toTarget.y, toTarget.x) * Mathf.Rad2Deg;
+        usableLerpConstant = 0;
       }
+
+      angle = Mathf.LerpAngle(
+          angle,
+          Mathf.Atan2(toTarget.y, toTarget.x) * Mathf.Rad2Deg,
+          usableLerpConstant 
+      );
     }
     else
     {
