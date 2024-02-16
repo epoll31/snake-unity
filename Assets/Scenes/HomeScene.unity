@@ -1041,6 +1041,7 @@ MonoBehaviour:
   settings:
     MusicVolume: 1
     SoundVolume: 1
+    ControlType: 0
   sounds:
   - sound: 0
     clip: {fileID: 8300000, guid: ba94a845446ae434380fe19f52145524, type: 3}
@@ -1057,6 +1058,7 @@ MonoBehaviour:
   - sound: 4
     clip: {fileID: 8300000, guid: 1cf86b6246ba047c294341721cf75e1c, type: 3}
     type: 0
+  MusicSource: {fileID: 0}
 --- !u!224 &789021114062176334
 RectTransform:
   m_ObjectHideFlags: 0

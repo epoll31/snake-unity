@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,7 +9,8 @@ public enum Setting
 {
   Reset,
   MusicVolume,
-  SoundVolume
+  SoundVolume,
+  ControlType
 }
 
 public class SettingsHandler : MonoBehaviour
@@ -41,7 +43,20 @@ public class SettingsHandler : MonoBehaviour
           });
           break;
         }
+      case Setting.ControlType:
+        {
+          TMP_Dropdown dropdown = GetComponent<TMP_Dropdown>();
+          dropdown.value = (int)SingleState.Instance.settings.ControlType;
+          break;
+        }
     }
+  }
+
+  public void SetControlType()
+  {
+    TMP_Dropdown dropdown = GetComponent<TMP_Dropdown>();
+    SingleState.Instance.settings.ControlType = (ControlType)dropdown.value;
+    SingleState.Instance.settings.SaveSettings();
   }
 
   public void Reset()
