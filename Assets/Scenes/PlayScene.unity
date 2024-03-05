@@ -295,6 +295,8 @@ MonoBehaviour:
   lengthPerPart: 0.2
   speed: 2
   coastSpeed: 1
+  joystickAngle: 0
+  joystickAmplifier: 1
   angle: 0
   steerLerpConstant: 0.05
 --- !u!4 &1055896201
@@ -831,9 +833,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1108295269}
   - {fileID: 1462513107}
   - {fileID: 1279292846}
-  - {fileID: 1108295269}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

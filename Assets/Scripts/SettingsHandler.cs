@@ -24,10 +24,11 @@ public class SettingsHandler : MonoBehaviour
       case Setting.MusicVolume:
         {
           Slider slider = GetComponent<Slider>();
-          slider.value = SingleState.Instance.settings.MusicVolume;
+          slider.value = SingleState.Instance.settings.MusicVolume * 5;
           slider.onValueChanged.AddListener((value) =>
           {
-            SingleState.Instance.settings.MusicVolume = value;
+            SingleState.Instance.MusicSource.volume = value * 0.2f;
+            SingleState.Instance.settings.MusicVolume = value * 0.2f;
             SingleState.Instance.settings.SaveSettings();
           });
           break;
@@ -35,10 +36,10 @@ public class SettingsHandler : MonoBehaviour
       case Setting.SoundVolume:
         {
           Slider slider = GetComponent<Slider>();
-          slider.value = SingleState.Instance.settings.SoundVolume;
+          slider.value = SingleState.Instance.settings.SoundVolume * 5;
           slider.onValueChanged.AddListener((value) =>
           {
-            SingleState.Instance.settings.SoundVolume = value;
+            SingleState.Instance.settings.SoundVolume = value * 0.2f;
             SingleState.Instance.settings.SaveSettings();
           });
           break;

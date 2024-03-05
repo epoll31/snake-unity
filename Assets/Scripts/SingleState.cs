@@ -55,16 +55,16 @@ public enum ControlType
 [Serializable]
 public class Settings
 {
-    [Range(0, 1)]
-    public float MusicVolume = 0.5f;
-    [Range(0, 1)]
-    public float SoundVolume = 0.5f;
+    [Range(0, 0.2f)]
+    public float MusicVolume = 0.1f;
+    [Range(0, 0.2f)]
+    public float SoundVolume = 0.1f;
     public ControlType ControlType;
 
     public void LoadSettings()
     {
-        MusicVolume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
-        SoundVolume = PlayerPrefs.GetFloat("SoundVolume", 0.5f);
+        MusicVolume = PlayerPrefs.GetFloat("MusicVolume", 0.1f);
+        SoundVolume = PlayerPrefs.GetFloat("SoundVolume", 0.1f);
         ControlType = (ControlType)PlayerPrefs.GetInt("ControlType", 0);
     }
 
@@ -172,30 +172,30 @@ public class SingleState : MonoBehaviour
     }
     private Stack<States> previousStates = new Stack<States>();
 
-    [CustomEditor(typeof(SingleState))]
-    public class StackPreview : Editor
-    {
-        public override void OnInspectorGUI()
-        {
-            GUILayout.Label("Current State: " + SingleState.Instance.State);
-            // get the target script as TestScript and get the stack from it
-            var ts = (SingleState)target;
-            var stack = ts.previousStates;
-
-            // some styling for the header, this is optional
-            var bold = new GUIStyle();
-            bold.fontStyle = FontStyle.Bold;
-            GUILayout.Label("Items in my stack", bold);
-
-            // add a label for each item, you can add more properties
-            // you can even access components inside each item and display them
-            // for example if every item had a sprite we could easily show it 
-            foreach (var item in stack)
-            {
-                GUILayout.Label(item.ToString());
-            }
-        }
-    }
+    // [CustomEditor(typeof(SingleState))]
+    // public class StackPreview : Editor
+    // {
+    //     public override void OnInspectorGUI()
+    //     {
+    //         GUILayout.Label("Current State: " + SingleState.Instance.State);
+    //         // get the target script as TestScript and get the stack from it
+    //         var ts = (SingleState)target;
+    //         var stack = ts.previousStates;
+    //
+    //         // some styling for the header, this is optional
+    //         var bold = new GUIStyle();
+    //         bold.fontStyle = FontStyle.Bold;
+    //         GUILayout.Label("Items in my stack", bold);
+    //
+    //         // add a label for each item, you can add more properties
+    //         // you can even access components inside each item and display them
+    //         // for example if every item had a sprite we could easily show it 
+    //         foreach (var item in stack)
+    //         {
+    //             GUILayout.Label(item.ToString());
+    //         }
+    //     }
+    // }
 
     private void OnStateChanged(object sender, StateChangedEventArgs e)
     {
